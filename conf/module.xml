@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module>
+	<grants />
+	<permissions />
+	<actions>
+		<action name="dispLoginxeserverAdminConfig" type="view" menu_name="Loginxe" menu_index="true" admin_index="true" />
+		<action name="dispLoginxeserverOAuth" type="view"/>
+		<action name="dispLoginxeserverOAuthFinish" type="view" />
+		<action name="procLoginxeserverAdminInsertConfig" type="controller" standalone="false" />
+	</actions>
+	<menus>
+		<menu name="Loginxe" type="all">
+			<title xml:lang="en">LoginXE Server</title>
+		</menu>
+	</menus>
+</module>

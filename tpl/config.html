@@ -1,0 +1,115 @@
+<!--// HEADER -->
+<include target="./_header.html" />
+<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
+
+<script>
+	fetch_unix_timestamp = function()
+	{
+		//return parseInt(new Date().getTime().toString().substring(0, 10));
+		return new Date().getTime().toString();
+	}
+</script>
+<!--// BODY -->
+<div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/loginxeserver/tpl/config/1'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+	<p>{$XE_VALIDATOR_MESSAGE}</p>
+</div>
+
+<section class="section">
+	<h1>
+		{$lang->cmd_naverlogin_config}
+		<a href="#descConfig" class="x_icon-question-sign" data-toggle="#descConfig">{$lang->help}</a>
+	</h1>
+	<p id="descConfig" class="x_alert x_alert-warn">{$lang->about_naverlogin_config}</p>
+	<form method="post" class="x_form-horizontal" action="./">
+		<input type="hidden" name="module" value="loginxeserver">
+		<input type="hidden" name="act" value="procLoginxeserverAdminInsertConfig">
+		<input type="hidden" name="xe_validator_id" value="modules/loginxeserver/tpl/config/1" />
+
+		{@
+		if(!isset($module_config->id)||$module_config->id=='') $id=md5(time());
+		else $id=$module_config->id;
+		if(!isset($module_config->id)||$module_config->key=='') $key=hash('sha256',time());
+		else $key=$module_config->key;
+		}
+		<div class="x_control-group">
+			<div class="x_control-label">{$lang->loginxe_id}</div>
+			<div class="x_controls">
+				<div class="x_input">
+					<input type="text" onclick="this.focus();this.select()" readonly="readonly" step="any" value="{$id}" id="cli_id" name="id" style="width:70%" >
+					<button class="x_btn" type="button" onclick="document.getElementById('cli_id').value=CryptoJS.MD5(fetch_unix_timestamp())">{$lang->loginxe_random_gen}</button>
+				</div>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<div class="x_control-label">{$lang->loginxe_key}</div>
+			<div class="x_controls">
+				<div class="x_input">
+					<input type="text" onclick="this.focus();this.select()" readonly="readonly" step="any" value="{$key}" id="cli_key" name="key" style="width:70%" >
+					<button class="x_btn" type="button" onclick="document.getElementById('cli_key').value=CryptoJS.SHA256(fetch_unix_timestamp())">{$lang->loginxe_random_gen}</button>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="x_control-group">
+			<div class="x_control-label">{$lang->naverlogin_id}</div>
+			<div class="x_controls">
+				<div class="x_input">
+					<input type="text" step="any" value="{$module_config->clientid}" name="clientid" size="7">
+
+				</div>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<div class="x_control-label">{$lang->naverlogin_key}</div>
+			<div class="x_controls">
+				<div class="x_input">
+					<input type="text" step="any" value="{$module_config->clientkey}"  name="clientkey" size="7">
+				</div>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<div class="x_control-label">{$lang->naverlogin_oauthdomain}</div>
+			<div class="x_controls">
+				<div class="x_input">
+					<input type="text" onclick="this.focus();this.select()" step="any" value="{getFullUrl('','module','loginxeserver','act','dispLoginxeserverOAuthFinish','provider','naver')}" style="width:90%" readonly="readonly">
+				</div>
+			</div>
+		</div>
+		<!-- {getFullUrl('','module','loginxeclient','act','dispLoginxeclientOAuth','provider','naver')} -->
+		<div class="x_control-group">
+			<div class="x_control-label">{$lang->githublogin_id}</div>
+			<div class="x_controls">
+				<div class="x_input">
+					<input type="text" step="any" value="{$module_config->githubclientid}" name="githubclientid" size="7">
+				</div>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<div class="x_control-label">{$lang->githublogin_key}</div>
+			<div class="x_controls">
+				<div class="x_input">
+					<input type="text" step="any" value="{$module_config->githubclientkey}" name="githubclientkey" size="7">
+				</div>
+			</div>
+		</div>
+		<div class="x_control-group">
+			<div class="x_control-label">{$lang->githublogin_oauthdomain}</div>
+			<div class="x_controls">
+				<div class="x_input">
+					<input type="text" onclick="this.focus();this.select()" step="any" value="{getFullUrl('','module','loginxeserver','act','dispLoginxeserverOAuthFinish','provider','github')}" style="width:90%" readonly="readonly">
+				</div>
+			</div>
+		</div>
+		<!--//$module_config->def_url . "index.php?act=procNaverloginOAuth"-->
+		<div class="x_clearfix btnArea">
+			<div class="x_pull-right">
+				<button class="x_btn x_btn-primary" type="submit">{$lang->cmd_registration}</button>
+			</div>
+		</div>
+	</form>
+</section>
+
+<!--// FOOTER -->
+<include target="./_footer.html" />

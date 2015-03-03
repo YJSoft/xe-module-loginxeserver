@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<lang>
+	<item name="naverlogin">
+		<value xml:lang="en"><![CDATA[LoginXE Server]]></value>
+	</item>
+	<item name="about_naverlogin">
+		<value xml:lang="en"><![CDATA[]]></value>
+		<value xml:lang="ko"><![CDATA[로그인 XE 서버 모듈]]></value>
+	</item>
+    <item name="cmd_naverlogin_config">
+        <value xml:lang="en"><![CDATA[]]></value>
+        <value xml:lang="ko"><![CDATA[API 설정]]></value>
+    </item>
+    <item name="naverlogin_id">
+    <value xml:lang="en"><![CDATA[Naver ClientID]]></value>
+    <value xml:lang="ko"><![CDATA[네이버 ClientID]]></value>
+</item>
+    <item name="naverlogin_key">
+        <value xml:lang="en"><![CDATA[Naver ClientSecret]]></value>
+        <value xml:lang="ko"><![CDATA[네이버 ClientSecret]]></value>
+    </item>
+    <item name="naverlogin_domain">
+        <value xml:lang="en"><![CDATA[Naver Domain]]></value>
+        <value xml:lang="ko"><![CDATA[네이버 도메인]]></value>
+    </item>
+    <item name="naverlogin_oauthdomain">
+        <value xml:lang="en"><![CDATA[Naver Callback url]]></value>
+    </item>
+    <item name="about_naverlogin_config">
+        <value xml:lang="en"><![CDATA[]]></value>
+        <value xml:lang="ko"><![CDATA[API가 개발중 상태일경우 API를 등록한 계정 이외엔 로그인이 되지 않습니다.]]></value>
+    </item>
+    <item name="naverlogin_howtoadd">
+        <value xml:lang="en"><![CDATA[]]></value>
+        <value xml:lang="ko"><![CDATA[네이버 로그인 주소]]></value>
+    </item>
+
+    <item name="githublogin_id">
+        <value xml:lang="en"><![CDATA[Github ClientID]]></value>
+        <value xml:lang="ko"><![CDATA[Github ClientID]]></value>
+    </item>
+    <item name="githublogin_key">
+        <value xml:lang="en"><![CDATA[Github ClientSecret]]></value>
+        <value xml:lang="ko"><![CDATA[Github ClientSecret]]></value>
+    </item>
+    <item name="githublogin_domain">
+        <value xml:lang="en"><![CDATA[Github Domain]]></value>
+        <value xml:lang="ko"><![CDATA[Github 도메인]]></value>
+    </item>
+    <item name="githublogin_oauthdomain">
+        <value xml:lang="en"><![CDATA[]]></value>
+        <value xml:lang="ko"><![CDATA[Github Callback url]]></value>
+    </item>
+    <item name="about_githublogin_config">
+        <value xml:lang="en"><![CDATA[]]></value>
+        <value xml:lang="ko"><![CDATA[API가 개발중 상태일경우 API를 등록한 계정 이외엔 로그인이 되지 않습니다.]]></value>
+    </item>
+    <item name="githublogin_howtoadd">
+        <value xml:lang="en"><![CDATA[]]></value>
+        <value xml:lang="ko"><![CDATA[Github 로그인 주소]]></value>
+    </item>
+    <item name="loginxe_not_implemented">
+        <value xml:lang="en"><![CDATA[]]></value>
+        <value xml:lang="ko"><![CDATA[구현되지 않은 Provider입니다.]]></value>
+    </item>
+    <item name="loginxe_not_finished_setting">
+        <value xml:lang="en"><![CDATA[]]></value>
+        <value xml:lang="ko"><![CDATA[서버 설정이 완료되지 않았습니다.]]></value>
+    </item>
+
+    <item name="loginxe_id">
+        <value xml:lang="en"><![CDATA[]]></value>
+        <value xml:lang="ko"><![CDATA[로그인XE 클라이언트 아이디]]></value>
+    </item>
+    <item name="loginxe_key">
+        <value xml:lang="en"><![CDATA[]]></value>
+        <value xml:lang="ko"><![CDATA[로그인XE 클라이언트 Key]]></value>
+    </item>
+    <item name="loginxe_random_gen">
+        <value xml:lang="en"><![CDATA[]]></value>
+        <value xml:lang="ko"><![CDATA[임의 생성]]></value>
+    </item>
+    <item name="loginxesvr_invalid_state">
+        <value xml:lang="en"><![CDATA[]]></value>
+        <value xml:lang="ko"><![CDATA[state 값이 잘못되었습니다. 인증 후 시간이 너무 오래 지났을 수도 있습니다.]]></value>
+    </item>
+    <item name="loginxesvr_need_openssl">
+        <value xml:lang="en"><![CDATA[]]></value>
+        <value xml:lang="ko"><![CDATA[OpenSSL 지원이 필요합니다.]]></value>
+    </item>
+</lang>
