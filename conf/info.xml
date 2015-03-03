@@ -2,8 +2,8 @@
 <module version="0.2">
 	<title xml:lang="en">LoginXE Server</title>
 	<description xml:lang="en">LoginXE Server Module</description>
-	<version>1.02</version>
-	<date>2015-02-04</date>
+	<version>1.03</version>
+	<date>2015-03-03</date>
 	<author email_address="yjsoft@yjsoft.pe.kr" link="http://yjsoft.pe.kr">
 		<name xml:lang="en">YJSoft</name>
 	</author>
