@@ -50,7 +50,15 @@
 				</div>
 			</div>
 		</div>
-
+		<div class="x_control-group">
+			<div class="x_control-label">로그인XE 사용 허가 도메인</div>
+			<div class="x_controls">
+				<div class="x_input">
+					<textarea name="loginxe_domains" id="loginxe_domains" rows="8" cols="42">{implode("\n",$module_config->loginxe_domains)}</textarea>
+					<p id="about_domains" class="x_help-block">도메인은 http://나 / 없이 순수 도메인명(example.com)만 입력해 주세요. /xe 등 폴더명 또한 빼주세요. 도메인간 구분은 줄바꿈으로 합니다.</p>
+				</div>
+			</div>
+		</div>
 
 		<div class="x_control-group">
 			<div class="x_control-label">{$lang->naverlogin_id}</div>
