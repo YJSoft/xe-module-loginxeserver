@@ -6,6 +6,8 @@
 		<action name="dispLoginxeserverAdminConfig" type="view" menu_name="Loginxe" menu_index="true" admin_index="true" />
 		<action name="dispLoginxeserverOAuth" type="view"/>
 		<action name="dispLoginxeserverOAuthFinish" type="view" />
+        <action name="dispLoginxeserverGetServerProtocolVersion" type="view" />
+        <action name="dispLoginxeserverGetAuthKey" type="view" />
 		<action name="procLoginxeserverAdminInsertConfig" type="controller" standalone="false" />
 	</actions>
 	<menus>

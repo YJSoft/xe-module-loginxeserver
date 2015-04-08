@@ -7,6 +7,75 @@ class loginxeserverView extends loginxeserver
 		$this->setTemplateFile(strtolower(str_replace('dispLoginxeserver', '', $this->act)));
 	}
 
+	function dispLoginxeserverGetServerProtocolVersion()
+	{
+		Context::setRequestMethod('JSON'); // 요청을 JSON 형태로
+		Context::setResponseMethod('JSON'); // 응답을 JSON 형태로
+
+		$this->add('version', $this->LOGINXE_SERVER_PROTOCOL);
+	}
+
+	function dispLoginxeserverGetAuthKey()
+	{
+		Context::setRequestMethod('JSON'); // 요청을 JSON 형태로
+		Context::setResponseMethod('JSON'); // 응답을 JSON 형태로
+
+		$service = Context::get('provider');
+		$state = Context::get('state');
+		$code = rawurldecode(Context::get('code'));
+
+		if($code=='' || $state=='' || $service=='')
+		{
+			//필요한 값이 없으므로 오류
+			return new Object(-1,'msg_invalid_request');
+		}
+
+		if(!$this->checkOpenSSLSupport())
+		{
+			return new Object(-1,'loginxesvr_need_openssl');
+		}
+
+		$oLoginXEServerModel = getModel('loginxeserver');
+		$module_config = $oLoginXEServerModel->getConfig();
+
+		if($service=='naver')
+		{
+			//API 서버에 code와 state값을 보내 인증키를 받아 온다
+			$ping_url = 'https://nid.naver.com/oauth2.0/token?client_id=' . $module_config->clientid . '&client_secret=' . $module_config->clientkey . '&grant_type=authorization_code&state=' . $state . '&code=' . $code;
+			$ping_header = array();
+			$ping_header['Host'] = 'nid.naver.com';
+			$ping_header['Pragma'] = 'no-cache';
+			$ping_header['Accept'] = '*/*';
+
+			$request_config = array();
+			$request_config['ssl_verify_peer'] = false;
+
+			$buff = FileHandler::getRemoteResource($ping_url, null, 10, 'GET', 'application/x-www-form-urlencoded', $ping_header, array(), array(), $request_config);
+			$data= json_decode($buff);
+
+			$token = $data->access_token;
+		}
+		elseif($service=='github')
+		{
+			//API 서버에 code와 state값을 보내 인증키를 받아 온다
+			$ping_url = 'https://github.com/login/oauth/access_token';
+			$ping_header = array();
+			$ping_header['Host'] = 'github.com';
+			$ping_header['Pragma'] = 'no-cache';
+			$ping_header['Accept'] = 'application/json';
+
+			$request_config = array();
+			$request_config['ssl_verify_peer'] = false;
+
+			$buff=FileHandler::getRemoteResource($ping_url, null, 10, 'POST', 'application/x-www-form-urlencoded', $ping_header, array(), array('client_id'=>$module_config->githubclientid,'client_secret'=>$module_config->githubclientkey,'code'=>$code), $request_config);
+			$data=json_decode($buff);
+
+			$token = $data->access_token;
+		}
+
+		$this->add('access_token', $token);
+	}
+
 	/**
 	 *
 	 */
@@ -20,6 +89,11 @@ class loginxeserverView extends loginxeserver
 		$id = Context::get('id');
 		$key = Context::get('key');
 		$state = Context::get('state');
+		$version = Context::get('version');
+		debugPrint($version);
+		//if version parameter is null, consider as version 1.0(old)
+		if($version=='') $version='1.0';
+		$_SESSION['loginxe_version'] = $version;
 		$_SESSION['loginxe_state'] = $state;
 		$callback = urldecode(Context::get('callback'));
 		$domain = parse_url($callback,PHP_URL_HOST);
@@ -80,6 +154,7 @@ class loginxeserverView extends loginxeserver
 		$service = Context::get('provider');
 		$state = Context::get('state');
 		$code = Context::get('code');
+		$version = $_SESSION['loginxe_version'];
 
 		if($code=='' || $state=='' || $service=='' || !isset($_SESSION['loginxe_callback']) || $_SESSION['loginxe_callback']=='')
 		{
@@ -99,6 +174,14 @@ class loginxeserverView extends loginxeserver
 		//세션변수 비교(CSRF 방지)
 		if( $state != $stored_state ) {
 			return new Object(-1, 'loginxesvr_invalid_state');
+		}
+
+		//if client protocol version is 1.1, just return auth_token
+		//client will call dispLoginxeserverGetAuthKey function to get access key
+		if($version=='1.1')
+		{
+			Context::set('url',$_SESSION['loginxe_callback'] . '&access_token=' . urlencode($code) . '&state=' . $state);
+			return;
 		}
 
 		//ssl 연결을 지원하지 않는 경우 리턴(API 연결은 반드시 https 연결이여야 함)
