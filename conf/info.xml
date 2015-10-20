@@ -4,8 +4,8 @@
 	<title xml:lang="en">LoginXE Server</title>
     <description xml:lang="ko">로그인XE 서버 모듈</description>
 	<description xml:lang="en">LoginXE Server Module</description>
-	<version>1.05</version>
-	<date>2015-04-12</date>
+	<version>1.06</version>
+	<date>2015-10-20</date>
 	<author email_address="yjsoft@yjsoft.pe.kr" link="http://yjsoft.pe.kr">
 		<name xml:lang="en">YJSoft</name>
 	</author>
