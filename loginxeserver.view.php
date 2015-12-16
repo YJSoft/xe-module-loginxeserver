@@ -101,9 +101,7 @@ class loginxeserverView extends loginxeserver
 		$module_config = $oLoginXEServerModel->getConfig();
 		if(!in_array($domain,$module_config->loginxe_domains)) return new Object(-1,'등록된 도메인이 아닙니다.');
 		$_SESSION['loginxe_callback'] = $callback;
-
-
-
+		
 		if($module_config->id!=$id || $module_config->key!=$key)
 		{
 			Context::set('url',getNotEncodedUrl('','module','loginxeserver','act','dispLoginxeserverOAuthFinish','error','1','message','msg_invalid_request'));
