@@ -88,7 +88,7 @@ class loginxeserverView extends loginxeserver
 		$service = Context::get('provider');
 		$id = Context::get('id');
 		$key = Context::get('key');
-		$state = Context::get('state');
+		$state = htmlentities(Context::get('state'));
 		$version = Context::get('version');
 		debugPrint($version);
 		//if version parameter is null, consider as version 1.0(old)
